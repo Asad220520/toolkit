@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../store/reducers/TodoSlice";
+import { addTodo, checkTodo, deleteTodo } from "../store/reducers/TodoSlice";
 const Todo = () => {
   const [value, setValue] = useState("");
   const { todo } = useSelector((r) => r.todo);
@@ -30,13 +30,31 @@ const Todo = () => {
       </div>
 
       {todo.map((el) => (
-        <ul class="w-[100%] text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          <li class="w-full flex justify-between items-center cursor-pointer  px-4 py-2 rounded-b-lg">
-            <span className="flex gap-2 items-center">
-              <input className=" cursor-pointer" type="checkbox" />
+        <ul
+          key={el.id}
+          className="w-[100%] text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        >
+          <li className="w-full flex justify-between items-center cursor-pointer  px-4 py-2 rounded-b-lg">
+            <span
+              className={
+                el.isDone
+                  ? "flex gap-2 items-center line-through"
+                  : "flex gap-2 items-center"
+              }
+            >
+              <input
+                onClick={() => dispaht(checkTodo(el.id))}
+                className="cursor-pointer"
+                type="checkbox"
+              />
               {el.title}
             </span>
-            <button className="bg-blue-500 p-1 rounded">DELETE</button>
+            <button
+              onClick={() => dispaht(deleteTodo(el.id))}
+              className="bg-blue-500 p-1 rounded"
+            >
+              DELETE
+            </button>
           </li>
         </ul>
       ))}
