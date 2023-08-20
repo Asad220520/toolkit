@@ -16,3 +16,6 @@ code {
   margin: 0 auto;
   padding: 0 15px;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
