@@ -15,6 +15,7 @@ const Todo = () => {
       <div className="relative w-full pb-10 flex items-center gap-2">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
         <input
+          onKeyDown={(e) => e.key === 'Enter' ? dispaht(addTodo(value)) : null}
           onChange={handleChange}
           type="text"
           id="voice-search"
