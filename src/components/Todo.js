@@ -5,9 +5,6 @@ const Todo = () => {
   const [value, setValue] = useState("");
   const { todo } = useSelector((r) => r.todo);
   const dispaht = useDispatch();
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
   console.log(todo);
   const addTask = () => dispaht(addTodo(value));
   return (
@@ -15,8 +12,10 @@ const Todo = () => {
       <div className="relative w-full pb-10 flex items-center gap-2">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
         <input
-          onKeyDown={(e) => e.key === 'Enter' ? dispaht(addTodo(value)) : null}
-          onChange={handleChange}
+          onKeyDown={(e) =>
+            e.key === "Enter" ? dispaht(addTodo(value)) : null
+          }
+          onChange={(e) => setValue(e.target.value)}
           type="text"
           id="voice-search"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -47,7 +46,9 @@ const Todo = () => {
                 onClick={() => dispaht(checkTodo(el.id))}
                 className="cursor-pointer"
                 type="checkbox"
+                checked={el.isDone ? true : false}
               />
+
               {el.title}
             </span>
             <button
